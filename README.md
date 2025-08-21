@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Star Enterprise Investment Website
+
+A professional investment platform for Star Enterprise (Star Pops & Star Ice), showcasing business metrics, a quarterly profit-sharing investment model, and generating investor agreements.
+
+## Features
+
+- **Hero Section**: Compelling introduction with key business metrics
+- **Business Metrics**: Interactive charts showing actuals and projections
+- **Investment Wizard**: Calculates profit-share, monthly estimate and quarterly payout
+- **PDF Generation**: Client-side PDF creation with logo and investor process
+- **Terms & Conditions**: Quarterly profit-sharing, target 1.20×, investor rights
+- **Responsive Design**: Mobile-first design with Tailwind CSS
+- **TypeScript**: Full type safety and modern development experience
+
+## Business Data
+
+The website showcases Star Pops' 2025 performance:
+- **Total Revenue**: GHS 10,982
+- **Total Profit**: GHS 5,619
+- **Profit Margin**: 51.1%
+- **Days Worked**: 54 (37.5% capacity utilization)
+- **Projected Full Capacity**: GHS 29,328 annual revenue
+
+## Investment Structure (Quarterly Profit-Sharing)
+
+- **Raise Target**: GHS 43,000 (Star Pops + Star Ice)
+- **Minimum Investment**: GHS 1,000
+- **Model**: Profit-share accrues monthly; payouts every 3 months (Mar/Jun/Sep/Dec)
+- **Target Return**: 1.20× of invested amount
+- **Principle**: High profit, high return (performance-adjusted payouts)
 
 ## Getting Started
 
-First, run the development server:
-
+1. Install dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Run the development server:
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Technology Stack
 
-## Learn More
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Charts**: Recharts
+- **PDF Generation**: html2pdf.js
+- **Icons**: Lucide React
 
-To learn more about Next.js, take a look at the following resources:
+## Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The website is ready to deploy to:
+- **Vercel** (recommended)
+- **Netlify**
+- **GitHub Pages**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contact
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+For questions about the investment platform:
+- **Email**: starenterprise001@gmail.com
+- **Company**: Star Enterprise (Star Pops & Star Ice)
+- **Location**: Ghana

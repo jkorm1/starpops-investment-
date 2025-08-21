@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Star Pops Investment - Feel the Pops",
@@ -15,21 +18,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin=""
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
-      </head>
       <body
-        className="bg-gradient-to-br from-yellow-50 to-orange-50 font-sans"
-        style={{ fontFamily: "Inter, system-ui, -apple-system, sans-serif" }}
+        className={`${inter.className} bg-gradient-to-br from-yellow-50 to-orange-50`}
       >
         {children}
       </body>
