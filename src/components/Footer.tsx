@@ -62,6 +62,14 @@ export default function Footer({ onShowTerms }: { onShowTerms: () => void }) {
                 </a>
               </li>
               <li>
+                <a
+                  href="/plan"
+                  className="text-gray-300 hover:text-yellow-400 transition-colors"
+                >
+                  Investment Plan
+                </a>
+              </li>
+              <li>
                 <button
                   onClick={onShowTerms}
                   className="text-gray-300 hover:text-yellow-400 transition-colors cursor-pointer text-left"

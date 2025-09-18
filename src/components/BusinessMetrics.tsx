@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   LineChart,
   Line,
@@ -12,78 +12,148 @@ import {
   ResponsiveContainer,
   BarChart,
   Bar,
+  PieChart,
+  Pie,
+  Cell,
 } from "recharts";
+import {
+  TrendingUp,
+  DollarSign,
+  Calendar,
+  Target,
+  BarChart3,
+} from "lucide-react";
+
+// Function to calculate totals from monthly history
+const calculateTotalsFromMonthlyHistory = (monthlyHistory: any[]) => {
+  let totalSales = 0;
+  let totalExpenses = 0;
+  let totalProfit = 0;
+  let totalDaysWorked = 0;
+  let totalDaysExpected = 0;
+
+  monthlyHistory.forEach((month) => {
+    totalSales += month.sales || 0;
+    totalExpenses += month.expenses || 0;
+    totalProfit += month.profit || 0;
+    totalDaysWorked += month.daysWorked || 0;
+    totalDaysExpected += month.daysExpected || 0;
+  });
+
+  const profitMargin = totalSales > 0 ? (totalProfit / totalSales) * 100 : 0;
+
+  return {
+    totalSales,
+    totalExpenses,
+    totalProfit,
+    totalDaysWorked,
+    totalDaysExpected,
+    profitMargin: Math.round(profitMargin * 10) / 10,
+  };
+};
+
+// Function to calculate quarterly totals from monthly history
+const calculateQuarterlyDataFromMonthly = (monthlyHistory: any[]) => {
+  const quarters = [
+    {
+      name: "Q1 2025",
+      months: ["January 2025", "February 2025", "March 2025"],
+    },
+    { name: "Q2 2025", months: ["April 2025", "May 2025", "June 2025"] },
+    { name: "Q3 2025", months: ["July 2025", "August 2025", "September 2025"] },
+  ];
+
+  return quarters.map((quarter) => {
+    let starPopsSales = 0;
+    let starPopsExpenses = 0;
+    let starPopsProfit = 0;
+
+    quarter.months.forEach((monthName) => {
+      const monthData = monthlyHistory.find((m) => m.month === monthName);
+      if (monthData) {
+        starPopsSales += monthData.sales || 0;
+        starPopsExpenses += monthData.expenses || 0;
+        starPopsProfit += monthData.profit || 0;
+      }
+    });
+
+    const totalProfit = starPopsProfit; // Star Ice is 0 for now
+    const profitSharingPool = totalProfit * 0.8; // 80% profit sharing
+
+    return {
+      quarter: quarter.name,
+      starPopsSales,
+      starPopsExpenses,
+      starPopsProfit,
+      starIceSales: 0,
+      starIceExpenses: 0,
+      starIceProfit: 0,
+      totalProfit,
+      profitSharingPool,
+      status: quarter.name === "Q3 2025" ? "In Progress" : "Completed",
+    };
+  });
+};
 
 export default function BusinessMetrics() {
   const [activeTab, setActiveTab] = useState("performance");
+  const [businessData, setBusinessData] = useState<any>(null);
+  const [calculatedData, setCalculatedData] = useState<any>(null);
 
-  // Actual business data from your Excel sheet (7 months, 54 working days)
-  const actualData = [
-  {
-    month: "Jan",
-    sales: 0,
-      profit: 0,
-      days: 0,
-    expenses: 0,
-      reason: "Business Planning Phase",
-  },
-  {
-    month: "Feb",
-    sales: 526,
-      profit: -840,
-      days: 6,
-    expenses: 1366,
-      reason: "",
-  },
-  {
-    month: "Mar",
-    sales: 552,
-      profit: 25,
-      days: 6,
-    expenses: 527,
-      reason: "",
-  },
-  {
-    month: "Apr",
-    sales: 1169,
-      profit: 969,
-      days: 7,
-      expenses: 200,
-      reason: "",
-  },
-  {
-    month: "May",
-    sales: 0,
-      profit: 0,
-      days: 0,
-    expenses: 0,
-      reason: "Semester Break",
-  },
-  {
-    month: "Jun",
-    sales: 4250,
-      profit: 1896,
-      days: 22,
-      expenses: 2354,
-      reason: "",
-  },
-  {
-    month: "Jul",
-    sales: 2425,
-      profit: 943,
-      days: 9,
-      expenses: 1482,
-      reason: "Academic Commitments",
-  },
-  {
-    month: "Aug",
-    sales: 2060,
-      profit: 969,
-      days: 4,
-      expenses: 1091,
-      reason: "Academic Commitments",
-    },
-  ];
+  useEffect(() => {
+    const fetchBusinessData = async () => {
+      try {
+        const response = await fetch("/business-data.json");
+        if (!response.ok) {
+          throw new Error("Failed to fetch business data");
+        }
+        const data = await response.json();
+        setBusinessData(data);
+
+        // Calculate totals from monthly history
+        const calculatedTotals = calculateTotalsFromMonthlyHistory(
+          data.monthlyHistory
+        );
+        const calculatedQuarterly = calculateQuarterlyDataFromMonthly(
+          data.monthlyHistory
+        );
+
+        setCalculatedData({
+          yearToDate: calculatedTotals,
+          quarterlyData: calculatedQuarterly,
+        });
+      } catch (err) {
+        console.error("Error fetching business data:", err);
+      }
+    };
+
+    fetchBusinessData();
+  }, []);
+
+  if (!businessData || !calculatedData) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading business data...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Transform monthly history data to match the expected format
+  const actualData = businessData.monthlyHistory.map((item: any) => ({
+    month: item.month.substring(0, 3),
+    sales: item.sales,
+    profit: item.profit,
+    days: item.daysWorked,
+    expenses: item.expenses,
+    reason: item.reason || "",
+  }));
+
+  // Use calculated data instead of hardcoded values
+  const yearToDate = calculatedData.yearToDate;
+  const quarterlyData = calculatedData.quarterlyData;
 
   // Projected data for full academic year (7 months, 168 working days)
   // Working months: Jan, Feb, Mar, Apr, Jun, Jul, Aug (May is break month)
@@ -122,8 +192,8 @@ export default function BusinessMetrics() {
     },
     {
       month: "May",
-    sales: 0,
-    profit: 0,
+      sales: 0,
+      profit: 0,
       days: 0,
       type: "Break",
       reason: "Semester Break",
@@ -156,25 +226,25 @@ export default function BusinessMetrics() {
 
   // Star Ice projections (same academic calendar as Star Pops)
   const starIceData = [
-    { month: "Jan", revenue: 9500, profit: 3800, type: "Star Ice", reason: "" },
+    { month: "Jan", revenue: 6000, profit: 2400, type: "Star Ice", reason: "" },
     {
       month: "Feb",
-      revenue: 10000,
-      profit: 4000,
+      revenue: 6500,
+      profit: 2600,
       type: "Star Ice",
       reason: "",
     },
     {
       month: "Mar",
-      revenue: 10500,
-      profit: 4200,
+      revenue: 7000,
+      profit: 2800,
       type: "Star Ice",
       reason: "",
     },
     {
       month: "Apr",
-      revenue: 11000,
-      profit: 4400,
+      revenue: 7500,
+      profit: 3000,
       type: "Star Ice",
       reason: "",
     },
@@ -187,22 +257,22 @@ export default function BusinessMetrics() {
     },
     {
       month: "Jun",
-      revenue: 11500,
-      profit: 4600,
+      revenue: 8000,
+      profit: 3200,
       type: "Star Ice",
       reason: "",
     },
     {
       month: "Jul",
-      revenue: 12000,
-      profit: 4800,
+      revenue: 8500,
+      profit: 3400,
       type: "Star Ice",
       reason: "",
     },
     {
       month: "Aug",
-      revenue: 12500,
-      profit: 5000,
+      revenue: 9000,
+      profit: 3600,
       type: "Star Ice",
       reason: "",
     },
@@ -210,43 +280,42 @@ export default function BusinessMetrics() {
 
   const combinedData = [...actualData, ...projectionData];
 
-  // Calculate totals
-  const totalActualSales = actualData.reduce(
-    (sum, item) => sum + item.sales,
-    0
-  );
-  const totalActualProfit = actualData.reduce(
-    (sum, item) => sum + item.profit,
-    0
-  );
-  const totalActualDays = actualData.reduce((sum, item) => sum + item.days, 0);
+  // Use calculated data from monthly history for actual performance
+  const totalActualSales = yearToDate.totalSales;
+  const totalActualProfit = yearToDate.totalProfit;
+  const totalActualDays = yearToDate.totalDaysWorked;
+  const expectedDaysIn7Months = yearToDate.totalDaysExpected;
 
-  // Expected days calculation (7 months × 24 days = 168 days)
-  const expectedDaysIn7Months = 7 * 24;
-
-  const totalProjectedSales = projectionData.reduce(
-    (sum, item) => sum + item.sales,
-    0
-  );
-  const totalProjectedProfit = projectionData.reduce(
-    (sum, item) => sum + item.profit,
-    0
-  );
-
-  // Calculate working days (excluding May break)
-  const totalProjectedDays = projectionData.reduce(
-    (sum, item) => sum + item.days,
-    0
-  );
-
+  // Calculate totals for Star Ice projections
   const totalStarIceRevenue = starIceData.reduce(
-    (sum, item) => sum + item.revenue,
+    (sum: number, item: any) => sum + item.revenue,
     0
   );
   const totalStarIceProfit = starIceData.reduce(
-    (sum, item) => sum + item.profit,
+    (sum: number, item: any) => sum + item.profit,
     0
   );
+
+  // Combined totals for academic year
+  const totalAcademicYearRevenue = totalActualSales + totalStarIceRevenue;
+  const totalAcademicYearProfit = totalActualProfit + totalStarIceProfit;
+
+  // Calculate working days for real Star Pops performance
+  const totalRealStarPopsDays = actualData.reduce(
+    (sum: number, item: any) => sum + (item.type === "Star Pops" ? 24 : 0),
+    0
+  );
+
+  // Calculate working days for Star Ice projections
+  const totalStarIceDays = starIceData.reduce(
+    (sum: number, item: any) => sum + (item.type === "Star Ice" ? 24 : 0),
+    0
+  );
+
+  // Projected data for future expansion
+  const totalProjectedSales = totalAcademicYearRevenue;
+  const totalProjectedProfit = totalAcademicYearProfit;
+  const totalProjectedDays = totalRealStarPopsDays + totalStarIceDays;
 
   return (
     <section id="business" className="py-16 bg-white">
@@ -321,7 +390,8 @@ export default function BusinessMetrics() {
                 Investment Target
               </h3>
               <div className="text-3xl font-bold text-orange-600 mb-1">
-                GHS 43,000
+                GHS{" "}
+                {businessData?.investmentTarget?.toLocaleString() || "43,000"}
               </div>
               <div className="text-orange-700">Total Raise</div>
               <div className="text-sm text-orange-600 mt-2">
@@ -353,12 +423,13 @@ export default function BusinessMetrics() {
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-indigo-600 mb-1">
-                GHS 43,000
+                GHS{" "}
+                {businessData?.investmentTarget?.toLocaleString() || "43,000"}
               </div>
               <div className="text-indigo-700">Investment Needed</div>
+            </div>
           </div>
-          </div>
-          </div>
+        </div>
 
         {/* Tab Navigation */}
         <div className="flex justify-center mb-8">
@@ -402,7 +473,7 @@ export default function BusinessMetrics() {
             <div className="bg-gray-50 rounded-xl p-6">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">
                 Actual Business Performance (6 Months)
-          </h3>
+              </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <h4 className="font-medium text-gray-700 mb-3">
@@ -410,9 +481,9 @@ export default function BusinessMetrics() {
                   </h4>
                   <ResponsiveContainer width="100%" height={300}>
                     <LineChart data={actualData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="month" />
-              <YAxis />
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="month" />
+                      <YAxis />
                       <Tooltip
                         formatter={(value, name, props) => {
                           if (value === 0 && props.payload.reason) {
@@ -422,39 +493,39 @@ export default function BusinessMetrics() {
                         }}
                       />
                       <Legend />
-              <Line
-                type="monotone"
-                dataKey="sales"
+                      <Line
+                        type="monotone"
+                        dataKey="sales"
                         stroke="#3b82f6"
                         strokeWidth={2}
-                name="Sales"
-              />
-              <Line
-                type="monotone"
-                dataKey="profit"
-                stroke="#10b981"
+                        name="Sales"
+                      />
+                      <Line
+                        type="monotone"
+                        dataKey="profit"
+                        stroke="#10b981"
                         strokeWidth={2}
-                name="Profit"
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+                        name="Profit"
+                      />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
                 <div>
                   <h4 className="font-medium text-gray-700 mb-3">
                     Working Days vs Performance
                   </h4>
-            <ResponsiveContainer width="100%" height={300}>
+                  <ResponsiveContainer width="100%" height={300}>
                     <BarChart data={actualData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" />
-                <YAxis />
-                <Tooltip />
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="month" />
+                      <YAxis />
+                      <Tooltip />
                       <Legend />
                       <Bar dataKey="days" fill="#f59e0b" name="Working Days" />
                       <Bar dataKey="sales" fill="#3b82f6" name="Sales (GHS)" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
               </div>
 
               <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -487,7 +558,7 @@ export default function BusinessMetrics() {
             <div className="bg-gray-50 rounded-xl p-6">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">
                 Full Academic Year Projections (7 Months, 168 Days)
-            </h3>
+              </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <h4 className="font-medium text-gray-700 mb-3">
@@ -536,12 +607,12 @@ export default function BusinessMetrics() {
                   <h4 className="font-medium text-gray-700 mb-3">
                     Profit Projections
                   </h4>
-            <ResponsiveContainer width="100%" height={300}>
+                  <ResponsiveContainer width="100%" height={300}>
                     <BarChart data={[...projectionData, ...starIceData]}>
-                <CartesianGrid strokeDasharray="3 3" />
+                      <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="month" />
-                <YAxis />
-                <Tooltip
+                      <YAxis />
+                      <Tooltip
                         formatter={(value, name, props) => {
                           if (value === 0 && props.payload.reason) {
                             return [`${props.payload.reason}`, name];
@@ -560,10 +631,10 @@ export default function BusinessMetrics() {
                         fill="#8b5cf6"
                         name="Star Ice Profit"
                       />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
 
               <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <h4 className="font-semibold text-blue-800 mb-2">
@@ -606,7 +677,7 @@ export default function BusinessMetrics() {
             <div className="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl p-8 border border-orange-200">
               <h3 className="text-2xl font-bold text-orange-800 mb-6 text-center">
                 🎯 New Investment Model: Profit-Sharing Partnership
-          </h3>
+              </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
@@ -638,7 +709,7 @@ export default function BusinessMetrics() {
                     Example Investment
                   </h4>
                   <div className="bg-white rounded-lg p-4 border border-orange-200">
-            <div className="text-center">
+                    <div className="text-center">
                       <div className="text-2xl font-bold text-orange-600 mb-2">
                         GHS 1,000 Investment
                       </div>
@@ -656,7 +727,10 @@ export default function BusinessMetrics() {
                         <div className="flex justify-between">
                           <span>Target Return:</span>
                           <span className="font-semibold">
-                            GHS 1,200 (20% profit)
+                            GHS 1,200 (
+                            {businessData?.performanceMetrics
+                              ?.profitSharingRate || 80}
+                            % profit)
                           </span>
                         </div>
                         <div className="flex justify-between">
@@ -664,12 +738,12 @@ export default function BusinessMetrics() {
                           <span className="font-semibold">
                             Until target reached
                           </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-              </div>
-            </div>
-            </div>
-          </div>
 
               <div className="mt-6 text-center">
                 <p className="text-orange-700 font-medium">
@@ -681,6 +755,27 @@ export default function BusinessMetrics() {
             </div>
           </div>
         )}
+
+        {/* Reports Link */}
+        <div className="mt-16 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 text-center">
+          <h3 className="text-3xl font-bold text-gray-900 mb-4">
+            📊 Business Reports & Financial Statements
+          </h3>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
+            Access detailed financial statements, performance reports, and
+            quarterly updates
+          </p>
+          <a
+            href="/reports"
+            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            <BarChart3 className="w-5 h-5 mr-2" />
+            View All Reports
+          </a>
+          <p className="text-sm text-gray-500 mt-3">
+            Print-ready financial statements and investor updates
+          </p>
+        </div>
 
         {/* Investment Target Section */}
         <div className="mt-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white text-center">

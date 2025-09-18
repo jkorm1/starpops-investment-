@@ -1,0 +1,240 @@
+{
+  "lastUpdated": "2025-01-15",
+  "investmentTarget": 43000,
+  "currentMonth": {
+    "month": "August 2025",
+    "expenses": 1314,
+    "profit": 1136,
+    "daysWorked": 6,
+    "daysExpected": 6,
+    "reason": "Current Month Performance - Grand Finale and CodeFest events"
+  },
+  "quarterlyData": [
+    {
+      "quarter": "Q1 2025",
+      "startDate": "2025-01-01",
+      "endDate": "2025-03-31",
+      "starPopsSales": 1078,
+      "starPopsExpenses": 1893,
+      "starPopsProfit": -815,
+      "starIceSales": 0,
+      "starIceExpenses": 0,
+      "starIceProfit": 0,
+      "totalProfit": -815,
+      "profitSharingPool": 0,
+      "status": "Completed"
+    },
+    {
+      "quarter": "Q2 2025",
+      "startDate": "2025-04-01",
+      "endDate": "2025-06-30",
+      "starPopsSales": 5449,
+      "starPopsExpenses": 2354,
+      "starPopsProfit": 3095,
+      "starIceSales": 0,
+      "starIceExpenses": 0,
+      "starIceProfit": 0,
+      "totalProfit": 3095,
+      "profitSharingPool": 2321,
+      "status": "Completed"
+    },
+    {
+      "quarter": "Q3 2025",
+      "startDate": "2025-07-01",
+      "endDate": "2025-08-31",
+      "starPopsSales": 4875,
+      "starPopsExpenses": 2796,
+      "starPopsProfit": 2079,
+      "starIceSales": 0,
+      "starIceExpenses": 0,
+      "starIceProfit": 0,
+      "totalProfit": 2079,
+      "profitSharingPool": 1559,
+      "status": "In Progress"
+    }
+  ],
+  "yearToDate": {
+    "totalSales": 11402,
+    "totalExpenses": 7043,
+    "totalProfit": 4359,
+    "totalDaysWorked": 56,
+    "totalDaysExpected": 168,
+    "profitMargin": 38.2
+  },
+  "projections": {
+    "starPops": {
+      "dailyRevenue": 400,
+      "monthlyRevenue": 9600,
+      "monthlyProfit": 5760,
+      "annualRevenue": 67200,
+      "annualProfit": 40320,
+      "businessModel": "2 Stands + Retail/Door-to-Door Sales (Academic Year Only)"
+    },
+    "starIce": {
+      "dailyRevenue": 200,
+      "monthlyRevenue": 4800,
+      "monthlyProfit": 2400,
+      "annualRevenue": 33600,
+      "annualProfit": 16800,
+      "businessModel": "Single Branch Expansion (Academic Year Only)"
+    },
+    "combined": {
+      "dailyRevenue": 600,
+      "monthlyRevenue": 14400,
+      "monthlyProfit": 8160,
+      "annualRevenue": 100800,
+      "annualProfit": 57120
+    }
+  },
+  "performanceMetrics": {
+    "profitSharingRate": 75,
+    "targetReturn": 1.5,
+    "minimumInvestment": 1000,
+    "payoutSchedule": "Half-Yearly",
+    "investmentPeriod": "7 months (academic year)",
+    "businessSustainability": "High - diversified revenue streams during academic year"
+  },
+  "monthlyHistory": [
+    {
+      "month": "January 2025",
+      "sales": 0,
+      "expenses": 0,
+      "profit": 0,
+      "daysWorked": 0,
+      "daysExpected": 24,
+      "reason": "No Business Activity - Academic Break"
+    },
+    {
+      "month": "February 2025",
+      "sales": 526,
+      "expenses": 1366,
+      "profit": -840,
+      "daysWorked": 6,
+      "daysExpected": 24,
+      "reason": "Startup Phase - High Initial Expenses"
+    },
+    {
+      "month": "March 2025",
+      "sales": 552,
+      "expenses": 527,
+      "profit": 25,
+      "daysWorked": 6,
+      "daysExpected": 24,
+      "reason": "Early Growth - Break-even Month"
+    },
+    {
+      "month": "April 2025",
+      "sales": 1169,
+      "expenses": 0,
+      "profit": 1169,
+      "daysWorked": 7,
+      "daysExpected": 24,
+      "reason": "Strong Performance - Zero Expenses Month"
+    },
+    {
+      "month": "May 2025",
+      "sales": 0,
+      "expenses": 0,
+      "profit": 0,
+      "daysWorked": 0,
+      "daysExpected": 24,
+      "reason": "Mid-Semester Break - No Business Activity"
+    },
+    {
+      "month": "June 2025",
+      "sales": 4250,
+      "expenses": 2354,
+      "profit": 1896,
+      "daysWorked": 22,
+      "daysExpected": 24,
+      "reason": "Peak Performance - KSB Exhibition & High Sales"
+    },
+    {
+      "month": "July 2025",
+      "sales": 2425,
+      "expenses": 1482,
+      "profit": 943,
+      "daysWorked": 9,
+      "daysExpected": 24,
+      "reason": "SRC Week Events - Strong Sales"
+    },
+    {
+      "month": "August 2025",
+      "sales": 2450,
+      "expenses": 1314,
+      "profit": 1136,
+      "daysWorked": 6,
+      "daysExpected": 24,
+      "reason": "Grand Finale & CodeFest - Event-Driven Sales"
+    },
+    {
+      "month": "September 2025",
+      "sales": 0,
+      "expenses": 0,
+      "profit": 0,
+      "daysWorked": 0,
+      "daysExpected": 0,
+      "reason": "Academic Break - No Business Activity"
+    },
+    {
+      "month": "October 2025",
+      "sales": 0,
+      "expenses": 0,
+      "profit": 0,
+      "daysWorked": 0,
+      "daysExpected": 0,
+      "reason": "Academic Break - No Business Activity"
+    },
+    {
+      "month": "November 2025",
+      "sales": 0,
+      "expenses": 0,
+      "profit": 0,
+      "daysWorked": 0,
+      "daysExpected": 0,
+      "reason": "Academic Break - No Business Activity"
+    },
+    {
+      "month": "December 2025",
+      "sales": 0,
+      "expenses": 0,
+      "profit": 0,
+      "daysWorked": 0,
+      "daysExpected": 0,
+      "reason": "Academic Break - No Business Activity"
+    }
+  ],
+  "allExpenses": [
+    "Maize",
+    "Sugar", 
+    "Package",
+    "Magarine",
+    "Milk",
+    "Toppings",
+    "Stand",
+    "Transport",
+    "Oil",
+    "Tissue",
+    "Bulb",
+    "Flavour",
+    "Food",
+    "Bolt",
+    "Shoe Repaire",
+    "Shirt Otration", 
+    "Coil",
+    "Butter",
+    "Employee",
+    "Alvi,Dian,Kofi",
+    "ASP",
+    "Nation",
+    "Dennis",
+    "Cups",
+    "Extension Board",
+    "Self Transport",
+    "Ice Cream Machine",
+    "Ice Cream Ingredients",
+    "Additional Stand Equipment",
+    "Retail Packaging",
+    "Door-to-Door Marketing"
+  ]
+}

@@ -25,12 +25,12 @@ export default function TermsSection({ onClose }: { onClose: () => void }) {
             </h3>
             <p className="text-gray-700 mb-3">
               This investment is a{" "}
-              <strong>quarterly profit-sharing partnership</strong>
+              <strong>7-month academic year partnership</strong>
               with Star Enterprise (Star Pops & Star Ice), a Ghana-based popcorn
               production, ice cream distribution, and snack business. It is{" "}
               <strong>not</strong> equity and <strong>not</strong> a loan. By
-              proceeding, you acknowledge that returns are based on actual
-              business performance and are not guaranteed.
+              proceeding, you acknowledge that returns are guaranteed at 1.5x
+              your investment amount over 7 months (academic year).
             </p>
           </div>
 
@@ -49,35 +49,36 @@ export default function TermsSection({ onClose }: { onClose: () => void }) {
                 <strong>Total Investment Target:</strong> GHS 43,000
               </li>
               <li>
-                <strong>Model:</strong> Quarterly profit-sharing based on actual
-                profits (high profit, high return)
+                <strong>Model:</strong> 7-month academic year partnership with
+                guaranteed 1.5x returns
               </li>
               <li>
-                <strong>Accrual:</strong> Profit share accrues monthly and is
-                paid out every 3 months
+                <strong>Accrual:</strong> Returns are distributed half-yearly
+                (twice a year)
               </li>
             </ul>
 
             <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
               <h4 className="font-semibold text-yellow-800 mb-2">
-                Return Structure (Quarterly Profit-Sharing)
+                Return Structure (Half-Yearly Returns)
               </h4>
               <p className="text-yellow-700 text-sm mb-2">
-                Investors receive a percentage of monthly profits and are paid
-                quarterly (March, June, September, December) until the target
-                return is reached.
+                Investors receive guaranteed monthly returns that accumulate and
+                are paid out twice a year until the target return of 1.5x is
+                reached.
               </p>
               <ul className="list-disc list-inside space-y-1 text-yellow-700 text-sm">
                 <li>
-                  <strong>Profit-Share:</strong> Based on investment amount and
-                  tier; calculated as a percentage of actual profits
+                  <strong>Monthly Returns:</strong> Fixed amount accumulated
+                  monthly and distributed half-yearly
                 </li>
                 <li>
-                  <strong>Target Return:</strong> 1.20× the invested amount
+                  <strong>Target Return:</strong> 1.5× the invested amount
+                  (guaranteed)
                 </li>
                 <li>
-                  <strong>Performance-Adjusted:</strong> High profit, high
-                  return; lower profits reduce payouts proportionally
+                  <strong>Fixed Timeline:</strong> 7-month investment period
+                  with half-yearly payouts
                 </li>
               </ul>
             </div>
@@ -139,10 +140,8 @@ export default function TermsSection({ onClose }: { onClose: () => void }) {
                   Rights Granted:
                 </h4>
                 <ul className="list-disc list-inside space-y-1 text-gray-700 text-sm">
-                  <li>
-                    Quarterly payout based on agreed profit-share percentage
-                  </li>
-                  <li>Access to quarterly financial summaries</li>
+                  <li>Half-yearly payout based on guaranteed 1.5x returns</li>
+                  <li>Access to monthly financial summaries</li>
                   <li>Email support and updates on major developments</li>
                 </ul>
               </div>
@@ -154,7 +153,7 @@ export default function TermsSection({ onClose }: { onClose: () => void }) {
                   <li>No equity ownership or voting rights</li>
                   <li>No entitlement to dividends or board representation</li>
                   <li>
-                    Profit-share interests are non-transferable without company
+                    Investment interests are non-transferable without company
                     consent
                   </li>
                 </ul>
@@ -168,7 +167,7 @@ export default function TermsSection({ onClose }: { onClose: () => void }) {
             </h3>
             <ul className="list-disc list-inside space-y-2 text-gray-700">
               <li>
-                Profit-share interests are contractual and non-transferable
+                Investment interests are contractual and non-transferable
                 without company consent
               </li>
               <li>
@@ -176,8 +175,8 @@ export default function TermsSection({ onClose }: { onClose: () => void }) {
                 assured
               </li>
               <li>
-                Payouts accrue monthly and are paid quarterly while the
-                agreement is active
+                Payouts are distributed monthly over 7 months (academic year)
+                while the agreement is active
               </li>
             </ul>
           </div>
@@ -206,8 +205,8 @@ export default function TermsSection({ onClose }: { onClose: () => void }) {
             </h3>
             <ul className="list-disc list-inside space-y-2 text-gray-700">
               <li>
-                Payouts continue quarterly until the investor receives 1.20× of
-                their invested amount
+                Payouts continue monthly until the investor receives 1.5× of
+                their invested amount over 7 months (academic year)
               </li>
               <li>
                 The company may, at its discretion, settle the remaining balance
@@ -225,7 +224,7 @@ export default function TermsSection({ onClose }: { onClose: () => void }) {
               8. Financial Reporting
             </h3>
             <ul className="list-disc list-inside space-y-2 text-gray-700">
-              <li>Quarterly financial reports provided to investors</li>
+              <li>Monthly financial reports provided to investors</li>
               <li>Annual audited financial statements</li>
               <li>Major business developments communicated promptly</li>
               <li>No guarantee of profitability or positive returns</li>

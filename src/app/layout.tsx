@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Star Pops Investment - Feel the Pops",
+  title: "Star Enterprise Investment - Feel the Pops & Chills",
   description:
-    "Invest in Star Pops, Ghana's premier popcorn business. Join us in revolutionizing the snack industry and empowering Ghana's economy.",
-  keywords: "Star Pops, investment, popcorn, Ghana, business, startup, equity",
+    "Invest in Star Enterprise, Ghana's premier popcorn and ice cream business. Join us in revolutionizing the snack industry with guaranteed 1.5x returns over 7 months (academic year).",
+  keywords:
+    "Star Enterprise, Star Pops, Star Ice, investment, popcorn, ice cream, Ghana, business, startup, guaranteed returns, academic year",
 };
 
 export default function RootLayout({
@@ -36,3 +37,4 @@ export default function RootLayout({
     </html>
   );
 }
+

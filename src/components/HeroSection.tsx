@@ -17,10 +17,10 @@ export default function HeroSection({
             <div className="flex items-center space-x-3">
               <Image
                 src="/sp.jpg"
-                alt="Star Pops Logo"
+                alt="Star Enterprise Logo"
                 width={40}
                 height={40}
-                className="rounded-full"
+                className="rounded-full shadow-md border-1 border-red-300"
               />
               <div>
                 <h1 className="text-xl font-bold text-gray-900">
@@ -41,6 +41,18 @@ export default function HeroSection({
                 className="text-gray-700 hover:text-orange-600 transition-colors"
               >
                 Investment
+              </a>
+              <a
+                href="/reports"
+                className="text-gray-700 hover:text-orange-600 transition-colors"
+              >
+                Reports
+              </a>
+              <a
+                href="/plan"
+                className="text-gray-700 hover:text-orange-600 transition-colors"
+              >
+                Investment Plan
               </a>
               <button
                 onClick={onShowTerms}
@@ -71,10 +83,10 @@ export default function HeroSection({
             unique
             <strong className="text-orange-600">
               {" "}
-              profit-sharing partnership
+              7-month academic year partnership
             </strong>{" "}
-            where investors earn a percentage of our monthly profits based on
-            their investment amount.
+            with guaranteed 1.5x returns, backed by our expanding Star Pops and
+            Star Ice businesses.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
@@ -92,23 +104,90 @@ export default function HeroSection({
             </div>
             <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover-lift transition-all animate-slide-in-right">
               <div className="text-3xl font-bold text-orange-600 mb-2">
-                Quarterly Payouts
+                Guaranteed Returns
               </div>
               <div className="text-gray-600">
-                Monthly Profits, 3-Month Payouts
+                1.5x Investment, 7-Month Timeline
               </div>
             </div>
           </div>
 
           <div className="bg-orange-50 border border-orange-200 rounded-xl p-6 max-w-2xl mx-auto">
             <h3 className="text-lg font-semibold text-orange-800 mb-3">
-              🎯 New Investment Model: Profit-Sharing Partnership
+              🎯 New Investment Model: 7-Month Academic Year Partnership
             </h3>
             <p className="text-orange-700">
-              Instead of fixed returns, investors receive a percentage of our
-              monthly profits, with <strong>quarterly payouts</strong>, until
-              they reach their target return. High profit, high return.
+              Investors receive guaranteed 1.5x returns over 7 months (academic
+              year), with
+              <strong>half-yearly payouts</strong>, providing predictable
+              returns while funding our business expansion during the academic
+              period.
             </p>
+            <div className="mt-4 text-center">
+              <a
+                href="/plan"
+                className="inline-flex items-center px-6 py-3 bg-orange-600 text-white font-semibold rounded-lg hover:bg-orange-700 transition-colors shadow-lg hover:shadow-xl"
+              >
+                📋 View Detailed Investment Plan
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Moving logo elements sliding across the screen */}
+        <div className="absolute bottom-4 left-0 w-full overflow-hidden pointer-events-none">
+          <div className="flex space-x-12 animate-slide-in-side">
+            <div className="flex items-center space-x-2">
+              <Image
+                src="/logo.png"
+                alt="Star Enterprise Logo"
+                width={32}
+                height={32}
+                className="rounded-full border-2 border-orange-300"
+              />
+              <span className="text-sm font-semibold text-orange-600">
+                Star Enterprise
+              </span>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <Image
+                src="/sp.jpg"
+                alt="Star Pops Logo"
+                width={32}
+                height={32}
+                className="rounded-full border-2 border-yellow-300"
+              />
+              <span className="text-sm font-semibold text-yellow-600">
+                Star Pops
+              </span>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <Image
+                src="/heyy.jpg"
+                alt="Star Ice Logo"
+                width={32}
+                height={32}
+                className="rounded-full border-2 border-blue-300"
+              />
+              <span className="text-sm font-semibold text-blue-600">
+                Star Ice
+              </span>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <Image
+                src="/flyer.jpg"
+                alt="Investment Logo"
+                width={32}
+                height={32}
+                className="rounded-full border-2 border-red-300"
+              />
+              <span className="text-sm font-semibold text-red-600">
+                Investment
+              </span>
+            </div>
           </div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import HeroSection from "../components/HeroSection";
 import BusinessMetrics from "../components/BusinessMetrics";
 import InvestmentWizard from "../components/InvestmentWizard";
+
 import TermsSection from "../components/TermsSection";
 import Footer from "../components/Footer";
 
